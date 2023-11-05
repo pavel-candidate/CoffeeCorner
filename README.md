@@ -3,7 +3,7 @@ Small project with demonstration of JUnit 5
 
 
 The program support the following operations:
-1. **Add an item(s) and create the receipt**. 
+1. **Add an item(s) and create the receipt** com.coffee.corner.services.ReceiptsService.newReceipt. 
 2. **Print the receipt**: com.coffee.corner.services.print.ReceiptPrint
 
 ## Bonus Program
