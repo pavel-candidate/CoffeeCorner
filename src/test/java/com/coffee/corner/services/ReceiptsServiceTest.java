@@ -67,8 +67,6 @@ class ReceiptsServiceTest {
     assertNotNull(receiptResult.getCustomer());
 
     assertEquals(inputMenuItemsList.size(), receiptResult.getMenuItemList().size());
-
-    // assertEquals(createOneCoffeeInList().get(0), receiptResult.getMenuItemList().get(0));
   }
 
 
@@ -111,7 +109,6 @@ class ReceiptsServiceTest {
     return Stream.of(
         Arguments.of(createCoffeePortionsForCoffeeFree(1)));
   }
-
   @ParameterizedTest
   @MethodSource("newReceipt_filled_repo_with_free_product_Data")
   void newReceipt_filled_repo_with_free_product(List<Integer> inputIdsList) {
@@ -145,7 +142,6 @@ class ReceiptsServiceTest {
         Arguments.of(createBeverageAndSnackAndExtra(), true),
         Arguments.of(createBeverageAndSnackOnly(), false));
   }
-
   // all cases for this test with empty receipt repository.
   @ParameterizedTest
   @MethodSource("newReceipt_with_beverage_and_snack_Data")
@@ -170,15 +166,10 @@ class ReceiptsServiceTest {
         .filter(item -> item.getProduct().isExtra())
         .filter(item -> item.getPrice() == 0)
         .collect(Collectors.toList());
-    if (extraInputExists) {
 
-    }
     int expectedCount = extraInputExists ? 1 : 0;
     assertEquals(expectedCount, resultMenuItemsWithZeroPrice.size());
-
-
   }
-
 
   private ReceiptsRepository fillReceiptsRepository(int qtyOfBeverages) {
     List<Integer> oneProductIdList = List.of(StubConstants.CoffeeIds.COFFEE_LARGE);
@@ -201,13 +192,11 @@ class ReceiptsServiceTest {
     return toReturn;
   }
 
-
   private static List<MenuItem> getMenuItemsFromIdList(List<Integer> inputIdsList) {
-    List<MenuItem> inputMenuItemsList = inputIdsList.stream().map(id ->
+    return inputIdsList.stream().map(id ->
         menuItemsRepository.findById(id)
             .orElseThrow(() -> new DataInitException("cannot find " + id))
     ).collect(Collectors.toList());
-    return inputMenuItemsList;
   }
 
   private static List<Integer> createOneCoffeeInList() {
@@ -242,7 +231,6 @@ class ReceiptsServiceTest {
     return IntStream.rangeClosed(1, qty)
         .mapToObj(i -> productId).collect(Collectors.toList());
   }
-
 
   private static void initProductAndMenuItemRepositoryFromStubs() {
     productsRepository = new ProductsRepository();
